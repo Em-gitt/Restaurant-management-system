@@ -59,12 +59,24 @@ git clone https://github.com/tu-usuario/restaurant-system.git
 cd restaurant-system
 ```
 
-### 2. Configurar bases de datos en PostgreSQL
-Crea las bases de datos requeridas en tu instancia local o remota de PostgreSQL:
-```sql
-CREATE DATABASE authdb;
-CREATE DATABASE tabledb;
-CREATE DATABASE menudb;
+### 2. Iniciar Infraestructura de Base de Datos con Podman Compose
+El proyecto incluye un archivo `compose.yaml` que despliega un contenedor PostgreSQL 18 y ejecuta un script de inicialización (`init-scripts/01-init-databases-and-users.sh`) que crea automáticamente las 10 bases de datos y sus respectivos usuarios con permisos aislados:
+
+```bash
+# Iniciar la base de datos en segundo plano
+podman compose up -d
+
+# Comprobar el estado del contenedor
+podman compose ps
+
+# Ver los logs del servicio PostgreSQL
+podman compose logs -f
+
+# Detener el servicio preservando los datos
+podman compose stop
+
+# Detener y remover el contenedor de Compose (sin borrar volúmenes de datos)
+podman compose down
 ```
 
 ### 3. Compilar el proyecto multi-módulo

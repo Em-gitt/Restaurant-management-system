@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: docker.io/library/postgres:18
+    container_name: restaurant-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_secure_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      DB_AUTH_PASSWORD: ${DB_AUTH_PASSWORD:-auth_pass}
+      DB_MENU_PASSWORD: ${DB_MENU_PASSWORD:-menu_pass}
+      DB_TABLE_PASSWORD: ${DB_TABLE_PASSWORD:-table_pass}
+      DB_ORDER_PASSWORD: ${DB_ORDER_PASSWORD:-order_pass}
+      DB_INVENTORY_PASSWORD: ${DB_INVENTORY_PASSWORD:-inventory_pass}
+      DB_EMPLOYEE_PASSWORD: ${DB_EMPLOYEE_PASSWORD:-employee_pass}
+      DB_KITCHEN_PASSWORD: ${DB_KITCHEN_PASSWORD:-kitchen_pass}
+      DB_PAYMENT_PASSWORD: ${DB_PAYMENT_PASSWORD:-payment_pass}
+      DB_DELIVERY_PASSWORD: ${DB_DELIVERY_PASSWORD:-delivery_pass}
+      DB_REPORT_PASSWORD: ${DB_REPORT_PASSWORD:-report_pass}
+    volumes:
+      - postgres_data:/var/lib/postgresql:Z
+      - ./init-scripts:/docker-entrypoint-initdb.d:ro,Z
+
+volumes:
+  postgres_data:
