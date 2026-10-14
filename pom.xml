@@ -28,5 +28,12 @@
     		<module>auth-service</module>
     		<module>table-service</module>
     		<module>menu-service</module>
+    		<module>employee-service</module>
+    		<module>inventory-service</module>
+    		<module>order-service</module>
+    		<module>kitchen-service</module>
+    		<module>payment-service</module>
+    		<module>delivery-service</module>
+    		<module>report-service</module>
 	</modules>	
 </project>
